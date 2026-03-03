@@ -1,0 +1,600 @@
+// step0: Applicant industrial new registration
+export const industrialNewAddForm = () => {
+    cy.get('.panel-body').eq(0).contains('a', 'আবেদন').click()  // click on শিল্প নিবন্ধন card 
+    cy.wait(5000);
+    cy.contains('label.checkbox-inline', 'নতুন').first().click(); // click "new" radio button
+    cy.wait(2000);
+    cy.contains('a.btn', 'পরবর্তী').click(); // click next button
+    cy.wait(2000);
+
+    // Fill out the industrial registration form
+    cy.get('#project_name', { timeout: 10000 }).should('be.visible').type('Testing')
+    // cy.get('#business_category_id').should('be.visible').select('অংশীদার') // Select অংশীদার type
+    // cy.get('#investment_type_id').should('be.visible').select('বিদেশী') // Select বিদেশী type
+    // cy.get('#investing_country_id ').should('be.visible').select('Austria') // Select Austria type
+    // cy.get('#total_investment').should('be.visible').type('10000') // Enter total investment
+    // cy.get('#industrial_category_id').should('be.visible').select('কুটির শিল্প') // Select কুটির শিল্প type
+    // cy.get('#industrial_sector_id').should('be.visible').select('বস্ত্র শিল্প ') // Select বস্ত্র শিল্প type
+    // cy.get('#industrial_sub_sector_id').should('be.visible').select('টেক্সটাইলস মিল ') // Select টেক্সটাইলস মিল type
+
+    // cy.get('[id="company_office_mobile"]').type('1627363947', { force: true })
+    // cy.wait(2000);
+    // cy.xpath('//*[@id="same_address"]').click()
+    // cy.wait(2000);
+    // cy.get('[id="addMoreDirector"]').first().should('be.visible').click()
+    // cy.wait(2000);
+    // cy.xpath('/html/body/div[1]/div[1]/section/section/div/div[2]/div/div[1]/div/div/form/div[3]/div[3]/div/div/div/label[2]/input').click()
+    // cy.wait(2000);
+    // cy.xpath('/html/body/div[1]/div[1]/section/section/div/div[2]/div/div[1]/div/div/form/div[3]/div[4]/div/div/div/label[1]/input').click()
+    // cy.wait(2000);
+    // cy.xpath('/html/body/div[1]/div[1]/section/section/div/div[2]/div/div[1]/div/div/form/div[3]/div[5]/div/div/div/label/input').click()
+    // cy.wait(2000);
+    // cy.xpath('/html/body/div[1]/div[1]/section/section/div/div[2]/div/div[1]/div/div/form/div[3]/div[7]/div/fieldset/div[5]/div/input').type('5505028877')
+    // cy.wait(2000);
+    // cy.get('[id="nid_dob"]').should('be.visible').type('02-Jan-1985').click()
+    // cy.wait(2000)
+    // cy.get('[id="user_nid_name"]').type('MD JALAL SHEK')
+    // cy.wait(2000)
+    // cy.xpath('/html/body/div[2]/div[3]/div[1]/div/div/span/div[1]').click() // Modal may not always appear
+    // cy.wait(2000);
+    // Recaptcha cannot be automated due to cross-origin iframe restrictions
+    // Manual intervention may be needed or use test recaptcha key
+    // cy.wait(3000) // Wait for recaptcha to load
+    // Click verify button directly
+    // cy.xpath('/html/body/div[1]/div[1]/section/section/div/div[2]/div/div[1]/div/div/form/div[3]/div[7]/div/fieldset/div[9]/button/i', { timeout: 10000 }).should('be.visible').click()
+    // cy.wait(2000)
+    // cy.get('[id="maleRadio"]').click({ force: true })
+    // cy.wait(2000)
+    // cy.get('[id="btn_save"]').click({ force: true })
+    // cy.wait(3000)
+    // cy.get('[id="correspondent_signature"]').first().click()
+    // cy.wait(1000)
+    // cy.get('[id="correspondent_signature"]').first().attachFile('signature.jpeg')
+    // cy.wait(3000) // Wait longer for image to upload
+    // Wait for modal to be fully visible before clicking crop button
+    // cy.get('#ImageUploadModal', { timeout: 10000 }).should('have.css', 'opacity', '1')
+    // cy.wait(1000)
+    // cy.get('[id="cropImageBtn"]').first().click({ force: true })
+    // cy.wait(3000)
+
+    // নিবন্ধন তথ্য
+    // cy.get('[id="company_ceo_fatherName"]').should('be.visible').type('xyxz')
+    // cy.get('[id="company_ceo_mobile"]').should('be.visible').type('1627363947', { force: true })
+
+    //খ. প্রতিষ্ঠানের বার্ষিক উৎপাদন ক্ষমতা 
+    cy.get('[id="apc_service_name"]').should('be.visible').type('ABC')
+    cy.get('[id="apc_quantity"]').should('be.visible').type('125')
+    cy.get('[id="apc_unit"]').should('be.visible').select('কেজি')
+    cy.get('[id="apc_amount_bdt"]').should('be.visible').type('500')
+    cy.wait(2000)
+
+    // গ. বিক্রয় %
+    cy.get('[id="local_sales_per"]').should('be.visible').type('44')
+
+    //ঘ. প্রতিষ্ঠানের জনবল 
+    cy.get('[id="local_male"]').should('be.visible').type('44')
+    cy.get('[id="local_female"]').should('be.visible').type('56')
+    cy.get('[id="foreign_male"]').should('be.visible').type('56')
+    cy.get('[id="foreign_female"]').should('be.visible').type('44')
+   
+    //ঙ. প্রয়োজনীয় উপযোগ-সেবার বিবরণ
+    cy.get('input[name="services_availability[0]"][value="1"]').click()
+    cy.wait(1000)
+    cy.get('input[name="services_availability[0]"][value="1"]').closest('tr').find('input[id="utility_distance"]').clear().type('10')
+    cy.wait(1000)
+    cy.get('input[name="services_availability[0]"][value="1"]').closest('tr').find('select[id="utility_distance_unit"]').select('মিটার')
+    cy.wait(2000)
+
+    cy.get('input[name="services_availability[1]"][value="1"]').click()
+    cy.wait(1000)
+    cy.get('input[name="services_availability[1]"][value="1"]').closest('tr').find('input[id="utility_distance"]').clear().type('2600')
+    cy.wait(1000)
+    cy.get('input[name="services_availability[1]"][value="1"]').closest('tr').find('select[id="utility_distance_unit"]').select('কিলোমিটার')
+    cy.wait(2000)
+
+    cy.get('input[name="services_availability[2]"][value="1"]').click()
+    cy.wait(1000)
+    cy.get('input[name="services_availability[2]"][value="1"]').closest('tr').find('input[id="utility_distance"]').clear().type('2600')
+    cy.wait(1000)
+    cy.get('input[name="services_availability[2]"][value="1"]').closest('tr').find('select[id="utility_distance_unit"]').select('কিলোমিটার')
+    cy.wait(2000)
+
+    cy.get('input[name="services_availability[3]"][value="1"]').click()
+    cy.wait(1000)
+    cy.get('input[name="services_availability[3]"][value="1"]').closest('tr').find('input[id="utility_distance"]').clear().type('2707')
+    cy.wait(1000)
+    cy.get('input[name="services_availability[3]"][value="1"]').closest('tr').find('select[id="utility_distance_unit"]').select('কিলোমিটার')
+    cy.wait(2000)
+
+    cy.get('input[name="services_availability[4]"][value="1"]').click()
+    cy.wait(1000)
+    cy.get('input[name="services_availability[4]"][value="1"]').closest('tr').find('input[id="utility_distance"]').clear().type('2800')
+    cy.wait(1000)
+    cy.get('input[name="services_availability[4]"][value="1"]').closest('tr').find('select[id="utility_distance_unit"]').select('মিটার')
+    cy.wait(2000)
+
+    cy.get('input[name="services_availability[5]"][value="1"]').click()
+    cy.wait(1000)
+    cy.get('input[name="services_availability[5]"][value="1"]').closest('tr').find('input[id="utility_distance"]').clear().type('2900')
+    cy.wait(1000)
+    cy.get('input[name="services_availability[5]"][value="1"]').closest('tr').find('select[id="utility_distance_unit"]').select('মিটার')
+    cy.wait(2000)
+
+    // চ. বিনিয়োগ
+    cy.get('[id="local_land_ivst"]').should('be.visible').should('be.visible').type('44')
+    cy.get('[id="local_building_ivst"]').should('be.visible').type('56')
+    cy.get('[id="local_machinery_ivst"]').should('be.visible').type('44')
+    cy.get('[id="local_others_ivst"]').should('be.visible').type('56')
+    cy.get('[id="local_wc_ivst"]').should('be.visible').type('100')
+    cy.get('[id="usd_exchange_rate"]').should('be.visible').type('300')
+    cy.wait(2000)
+
+    cy.get('[id="ceo_taka_invest"]').should('be.visible').type('55')
+    cy.get('[id="ceo_dollar_invest"]').should('be.visible').type('66')
+    cy.get('[id="ceo_loan_country"]').should('be.visible').type('Australia')
+    cy.wait(3000)
+    cy.get('[id="local_loan_taka"]').should('be.visible').type('77')
+    cy.get('[id="local_loan_dollar"]').should('be.visible').type('88')
+    cy.get('[id="local_loan_country"]').should('be.visible').type('Afghanistan')
+    cy.wait(3000)
+    cy.get('[id="foreign_loan_taka"]').should('be.visible').type('99')
+    cy.get('[id="foreign_loan_dollar"]').should('be.visible').type('111')
+    cy.get('[id="foreign_loan_country"]').should('be.visible').type('France')
+    cy.wait(3000)
+
+    cy.get('[id="loan_country_id"]').should('be.visible').select('American Samoa')
+    cy.get('[id="loan_org_name"]').should('be.visible').type('ABC Ltd')
+    cy.get('[id="loan_amount"]').should('be.visible').type('999')
+    cy.get('[id="loan_receive_date"]').should('be.visible').type('01-06-2023').click()
+    cy.wait(2000)
+
+    //1. save_as_draft tab
+    cy.get('#save_as_draft').click()
+    cy.wait(5000)
+}
+
+// step1: Open Applicant industrial new registration edit blade and submit for payment
+export const industrialNewEditSubmitFormOpen = () => {
+
+    cy.viewport(1920, 1080)
+
+    // click application list
+    cy.contains('a', 'আবেদন', { timeout: 15000 }).click()
+
+    // click tab
+    cy.contains('a[data-toggle="tab"]', 'আবেদনের তালিকা', { timeout: 15000 }).click()
+
+    // ADD THIS
+    cy.get('table tbody tr', { timeout: 20000 }).should('have.length.greaterThan', 0)
+
+    // then click edit button of first row
+    cy.get('a.common_batch_update', { timeout: 20000 }).first().click()
+
+    // Scroll to top after clicking edit button
+    cy.scrollTo('top')
+    cy.wait(2000)
+
+    //1. step1 next tab
+    cy.get('a.next').eq(0).click()
+    cy.wait(5000)
+
+    //যন্ত্রপাতি ও সরঞ্জামাদি tab
+    // স্থানীয়ভাবে সংগৃহীত/সংগৃহীতব্য
+    // cy.contains('button', 'নতুন যুক্ত করুন').should('be.visible').click()
+    // cy.get('#local_machine_manual_input').should('be.visible').click()
+    // cy.get('#local_machinery_nm').eq(0).type('Machinery ABC')
+    // cy.get('#local_machinery_qty').eq(0).type('25')
+    // cy.get('#local_machinery_price').eq(0).type('22')
+    // cy.get('#local_save_btn').should('be.visible').and('not.be.disabled').click()
+
+
+    cy.contains('button', 'নতুন যুক্ত করুন').should('be.visible').click()
+    cy.get('#local_machine_manual_input').should('be.visible').click()
+    cy.get('#local_machinery_name').eq(0).type('Machinery ABC')
+    cy.get('#local_machinery_number').eq(0).type('25')
+    cy.get('#local_machinery_price').eq(0).type('22')
+    cy.get('#local_save_btn').should('be.visible').and('not.be.disabled').click()
+    cy.get('.close_modal').first().should('be.visible').click()
+    cy.wait(3000)
+    
+    // // Click correct + button
+    // cy.xpath('/html/body/div[1]/div[1]/section/section/div/div[2]/div/div[2]/div[2]/div/div/div[2]/form/div[2]/fieldset[2]/div[1]/div[2]/div[1]/div[2]/div/table/tbody[1]/tr/td[4]/a/i', { timeout: 10000 }).should('be.visible').click()
+
+    // cy.get('#local_machinery_nm', { timeout: 20000 }).should('have.length.greaterThan', 1)
+
+    // // Now safe to use eq(1)
+    // cy.get('#local_machinery_nm').eq(1).type('Machinery XYZ')
+    // cy.get('#local_machinery_qty').eq(1).type('30')
+    // cy.get('#local_machinery_price').eq(1).type('11')
+
+    // আমদানিকৃত/আমদানিতব্য
+    cy.get('a[data-action*="imported-machinery"] button').should('be.visible').click()
+    cy.get('#local_machine_manual_input').should('be.visible').click()
+    cy.get('#imported_machinery_name').eq(0).type('Building ABC')
+    cy.get('#imported_machinery_number').eq(0).type('30')
+    cy.get('#imported_machinery_price').eq(0).type('22')
+    cy.get('#local_save_btn').should('be.visible').and('not.be.disabled').click()
+    cy.get('.close_modal').first().should('be.visible').click()
+    cy.wait(3000)
+
+    //কাঁচামাল ও মোড়ক উপকরণের বিবরণ
+    //ক. স্থানীয়ভাবে সংগৃহীত/সংগৃহীতব্য
+    // cy.get('#local_raw_material_name').eq(0).type('A')
+    // cy.get('#local_raw_material_quantity').eq(0).type('50')
+    // cy.get('#local_raw_material_unit').eq(0).select('কেজি')
+    // cy.get('#local_raw_material_amount_bdt').eq(0).type('20')
+    // cy.wait(2000)
+
+    //খ. আমদানিকৃত/আমদানিতব্য
+    // cy.get('#imported_raw_material_name').eq(0).type('B')
+    // cy.get('#imported_raw_material_quantity').eq(0).type('60')
+    // cy.get('#imported_raw_material_unit').eq(0).select('কেজি')
+    // cy.get('#imported_raw_material_amount_bdt').eq(0).type('30')
+    // cy.wait(2000)
+
+    //2. Navigate to next tab
+    cy.get('a.next').eq(0).click()
+    cy.wait(5000)
+
+    //3. Navigate to next tab
+    // cy.get('[id="addMoreDirector"]').first().should('be.visible').click()
+    // cy.wait(2000);
+    // cy.get('input[id="nationality_type"][value="bangladeshi"]').check().should('be.checked')
+    // cy.wait(2000);
+    // cy.get('input[id="identity_type"][value="nid"]').check().should('be.checked')
+    // cy.wait(2000);
+    // cy.get('input[name="user_nid"]').type('5505028877')
+    // cy.wait(2000)
+    // cy.get('input[id="nid_dob"]').should('be.visible').type('02-Jan-1985').click()
+    // cy.wait(2000)
+    // cy.get('input[id="user_nid_name"]').type('MD JALAL SHEK')
+    // cy.wait(2000)
+    // cy.get('textarea[name="g-recaptcha-response"]').invoke('show').type('test-token', { force: true })
+    // cy.wait(2000)
+    // cy.get('button[id="NIDVerifyBtn"]').should('be.visible').click()
+    // cy.wait(3000)
+    // cy.get('input[id="maleRadio"]').click({ force: true })
+    // cy.wait(2000)
+    // cy.get('button[id="btn_save"]').click({ force: true })
+    // cy.wait(3000)
+    cy.get('a.next').eq(0).click()
+    cy.wait(5000)
+    
+    //4. Fill authorization details
+    cy.get('input[id="auth_person_desig"]', { timeout: 10000 }).should('be.visible').type('Director')
+    cy.get('input[id="auth_person_address"]').should('be.visible').type('Mirpur, Dhaka')
+    cy.get('input[id="authorization_letter_edit"]').first().attachFile('1.pdf')
+    cy.get('input[id^="file"]').first().attachFile('1.pdf')
+    cy.get('input[id="accept_terms"]').click()
+    cy.get('a.next').eq(0).click({ force: true })
+    cy.wait(5000)
+
+    cy.get('input[id="sfp_contact_address"]').should('be.visible').type('Mirpur, Dhaka')
+    cy.wait(3000)
+
+    cy.get('button[id="submitForm"]').scrollIntoView().should('be.visible').should('be.enabled')
+    cy.wait(2000)
+    cy.get('button[id="submitForm"]').click() //pay button
+    
+    // Wait for navigation to payment gateway
+    cy.url({ timeout: 20000 }).should('include', 'spgwebuat.sonalibank.com.bd')
+    cy.wait(3000)
+    
+    // Payment gateway - cross origin
+    cy.origin('https://spgwebuat.sonalibank.com.bd', () => {
+        // Handle errors inside cy.origin
+        Cypress.on('uncaught:exception', (err) => {
+            if (err.message.includes('baseUrl') || err.message.includes('Identifier') || err.name === 'SyntaxError') {
+                return false
+            }
+        })
+        
+        cy.get('input[value="Account"]', { timeout: 15000 }).should('be.visible').click()
+        cy.wait(5000)
+        cy.get('.swal2-confirm').first().click()
+        cy.wait(5000)
+        cy.get('input[id="PayAccountNo"]').type('1234567891011')
+        cy.wait(3000)
+        cy.get('input[id="PayAccountName"]').type('Jahangir Alam')
+        cy.wait(3000)
+        cy.get('input[id="PayMobile"]').type('11111111111')
+        cy.wait(3000)
+        cy.get('input[value="ConfirmRequest"]').click()
+        cy.wait(3000)
+        cy.get('input[id="OTPVal"]').type('123456')
+        cy.wait(3000)
+        cy.get('input[id="btnConfirm"]').click()
+        cy.wait(5000)
+    })
+
+    // Wait for navigation back from payment gateway
+    cy.url({ timeout: 30000 }).should('not.include', 'spgwebuat.sonalibank.com.bd')
+    cy.url({ timeout: 10000 }).should('include', '/client/industry-new/list/')
+    cy.wait(3000)
+
+    // Verify payment success message
+    cy.get('.alert-success', { timeout: 15000 })
+      .should('be.visible')
+      .and('contain', 'Payment submitted successfully')
+
+}
+
+// step1: Process application as 9th grade officer
+export const extensionOfficer9thGradeOrEquivalentStep1 = () => 
+{
+    cy.viewport(1920, 1080)
+
+    // click on application list
+    cy.contains('a', 'আবেদন', { timeout: 15000 }).should('be.visible').first().click()
+
+    // Wait until table rows are loaded
+    cy.get('table tbody tr', { timeout: 20000 }).should('have.length.greaterThan', 0)
+
+    // Open the first application (Step 1 - 9th grade officer)
+    cy.get('a.common_batch_update', { timeout: 20000 }).first().click({ force: true })
+
+    // ===============================
+    // Step1: 9th grade → 6th grade
+    // ===============================
+
+    cy.get('#application_status', { timeout: 15000 }).should('be.visible').select('Recommended')
+    cy.get('#is_user', { timeout: 15000 }).should('be.visible').select('rd 1')
+    cy.contains('button', 'Process', { timeout: 15000 }).should('be.visible').click()
+
+    // ===============================
+    // Observation flow (commented but corrected)
+    // ===============================
+
+    // cy.get('#application_status', { timeout: 15000 }).should('be.visible').select('Observation')
+    // cy.wait(2000)
+
+    // cy.get('#is_user', { timeout: 15000 }).should('be.visible').select('rd 1')
+    // cy.wait(2000)
+
+    // cy.contains('button', 'Process', { timeout: 15000 }).should('be.visible').click()
+    // cy.wait(3000)
+
+    // ===============================
+    // Shortfall flow (commented but corrected)
+    // ===============================
+
+    // cy.get('#application_status', { timeout: 15000 }).should('be.visible').select('Shortfall')
+
+    // cy.wait(2000)
+
+    // cy.contains('button', 'Process', { timeout: 15000 }).should('be.visible').click()
+
+    // cy.wait(3000)
+}
+
+// step2: Process application as 6th grade officer
+export const assistantGeneralManager6thGradeOrEquivalentStep2 = () => 
+{
+    // ===============================
+    // Step2: 6th grade → Applicant
+    // ===============================
+
+    cy.contains('a', 'আবেদন', { timeout: 15000 }).should('be.visible').first().click()
+    cy.wait(3000)
+    // Wait again for table load
+    cy.get('table tbody tr', { timeout: 20000 }).should('have.length.greaterThan', 0)
+
+    // Open first application again
+    cy.get('a.common_batch_update', { timeout: 20000 }).first().click({ force: true })
+    cy.wait(3000)
+    // Approved to Applicant
+    // cy.get('#application_status', { timeout: 15000 }).should('be.visible').select('Approved')
+    // cy.contains('button', 'Process', { timeout: 15000 }).should('be.visible').click()
+    
+    cy.get('#application_status').should('be.visible').select('Approved')
+    cy.wait(2000)
+    cy.get('button.btn-primary.send', { timeout: 10000 }).should('be.visible').and('not.be.disabled').click()
+    cy.wait(3000)
+    
+    // ===============================
+    // Rejected flow (commented but corrected)
+    // ===============================
+
+    // cy.get('#application_status', { timeout: 15000 }).should('be.visible').select('Rejected')
+    // cy.wait(2000)
+
+    // cy.contains('button', 'Process', { timeout: 15000 }).should('be.visible').click()
+    // cy.wait(3000)
+
+    // ===============================
+    // Shortfall to 6th grade (commented but corrected)
+    // ===============================
+
+    // cy.get('#application_status', { timeout: 15000 }).should('be.visible').select('Shortfall')
+    // cy.wait(2000)
+
+    // cy.contains('button', 'Process', { timeout: 15000 }).should('be.visible').click()
+    // cy.wait(3000)
+}
+
+// step3: Government payment by applicant
+export const applicantOrInvestorStep3 = () => 
+{
+    
+    // click application list
+    cy.contains('a', 'আবেদন', { timeout: 15000 }).click()
+
+    // click tab
+    cy.contains('a[data-toggle="tab"]', 'আবেদনের তালিকা', { timeout: 15000 }).click()
+
+    // ADD THIS
+    cy.get('table tbody tr', { timeout: 15000 }).should('have.length.greaterThan', 0)
+    cy.wait(3000);
+    // then click open
+    cy.get('a.common_batch_update', { timeout: 15000 }).first().click()
+    cy.wait(3000);
+
+    cy.get('[id="gfp_contact_address"]', { timeout: 10000 }).should('be.visible').type('Mirpur, Dhaka')
+    cy.wait(3000)
+    cy.get('[id="submitForm"]').scrollIntoView().should('be.visible').should('be.enabled')
+    cy.wait(2000)
+    cy.get('[id="submitForm"]').click() //pay button
+    
+    // Wait for navigation to payment gateway
+    cy.url({ timeout: 20000 }).should('include', 'spgwebuat.sonalibank.com.bd')
+    cy.wait(3000)
+    
+    // Payment gateway - cross origin
+    cy.origin('https://spgwebuat.sonalibank.com.bd', () => {
+        // Handle errors inside cy.origin
+        Cypress.on('uncaught:exception', (err) => {
+            if (err.message.includes('baseUrl') || err.message.includes('Identifier') || err.name === 'SyntaxError') {
+                return false
+            }
+        })
+        
+        // wait for the payment options to load and be visible
+        cy.wait(600000) //10 minutes wait for manual payment or test data entry
+
+        cy.get('[value="Account"]', { timeout: 15000 }).should('be.visible').click()
+        cy.wait(5000)
+        cy.get('.swal2-confirm').first().click()
+        cy.wait(5000)
+        cy.get('[id="PayAccountNo"]').type('1234567891011')
+        cy.wait(3000)
+        cy.get('[id="PayAccountName"]').type('Jahangir Alam')
+        cy.wait(3000)
+        cy.get('[id="PayMobile"]').type('11111111111')
+        cy.wait(3000)
+        cy.get('[value="ConfirmRequest"]').click()
+        cy.wait(3000)
+        cy.get('[id="OTPVal"]').type('123456')
+        cy.wait(3000)
+        cy.get('[id="btnConfirm"]').click()
+        cy.wait(5000)
+    })
+}
+
+// step4: Final approval by authorized user
+export const assistantGeneralManager6thGradeOrEquivalentStep4 = () => 
+{
+    cy.viewport(1920, 1080)
+
+    // Click on application list
+    cy.contains('a', 'আবেদন', { timeout: 15000 }).should('be.visible').first().click()
+    cy.wait(3000)
+
+    // Wait until table loads
+    cy.get('table tbody tr', { timeout: 20000 }).should('have.length.greaterThan', 0)
+
+    // Open first application
+    cy.get('a.common_batch_update', { timeout: 20000 }).first().click({ force: true })
+    cy.wait(3000)
+
+    // Final approval
+    // cy.get('#application_status', { timeout: 15000 }).should('be.visible').select('Sign the registration')
+    // cy.wait(2000)
+    // cy.contains('button', 'Process', { timeout: 15000 }).should('be.visible').click()
+    // cy.wait(3000)
+    cy.get('#application_status').should('be.visible').select('Sign the registration')
+    cy.wait(2000)
+    cy.contains('button', 'Process').should('be.visible').click()
+    cy.wait(3000)
+}
+
+// step5: Check certificate generation and application download
+export const certificateButtonCheck = () => 
+{
+    // click application list
+    cy.contains('a', 'আবেদন', { timeout: 15000 }).click()
+    cy.wait(3000);
+
+    // click tab
+    cy.contains('a[data-toggle="tab"]', 'আবেদনের তালিকা', { timeout: 15000 }).click()
+
+    // ADD THIS
+    cy.get('table tbody tr', { timeout: 20000 }).should('have.length.greaterThan', 0)
+
+    // then click open
+    cy.get('a.common_batch_update', { timeout: 20000 }).first().click()
+
+    // ===============================
+    // ADD HERE
+    // ===============================
+
+    // wait page load একটু
+    cy.wait(3000)
+
+    // check certificate button আছে কিনা
+    cy.get('body').then(body => {
+
+        if (body.find('a[title="Certificate"]').length > 0) {
+            cy.log('Certificate button found')
+
+            cy.get('a[title="Certificate"]')
+              .should('be.visible')
+        } 
+        else {
+            cy.log('Certificate not generated yet')
+            throw new Error('Certificate button not found on the page')
+        }
+
+    })
+
+    // check application download button
+    cy.get('body').then(body => {
+
+        if (body.find('#html2pdf').length > 0) {
+            cy.log('Application download button found')
+
+            cy.get('#html2pdf')
+              .should('be.visible')
+        }
+
+    })
+}
+
+// step6: Check all sections in view blade
+export const viewBladeSectionsCheck = () => 
+{
+    cy.viewport(1920, 1080)
+
+    // Click on application list
+    cy.contains('a', 'আবেদন', { timeout: 15000 }).should('be.visible').first().click()
+    cy.wait(3000)
+
+    // Wait until table loads
+    cy.get('table tbody tr', { timeout: 20000 }).should('have.length.greaterThan', 0)
+
+    // Open first application
+    cy.get('a.common_batch_update', { timeout: 20000 }).first().click({ force: true })
+    cy.wait(3000)
+
+    // check texts exist - Section 1: শিল্প নিবন্ধন
+    cy.contains('span.section_head', 'শিল্প নিবন্ধন').scrollIntoView().should('be.visible')
+    cy.contains('সাধারণ তথ্য').scrollIntoView().should('be.visible')
+    cy.contains('প্রতিষ্ঠানের কার্যালয়ের ঠিকানা').scrollIntoView().should('be.visible')
+    cy.contains('প্রতিষ্ঠানের কারখানার ঠিকানা').scrollIntoView().should('exist')
+    cy.contains('প্রতিষ্ঠানের প্রধান নির্বাহী/ব্যবস্থাপনা পরিচালক').scrollIntoView().should('exist')
+    cy.contains('p', 'নিবন্ধন গ্রহণ করতে ইচ্ছুক কার্যালয়ের নাম').scrollIntoView().should('be.visible')
+    // Section 2: নিবন্ধন তথ্য
+    cy.contains('p.section_head', 'নিবন্ধন তথ্য').scrollIntoView().should('be.visible')
+    cy.wait(1000)
+    cy.contains('ক. প্রতিষ্ঠানের কার্যাবলীর তথ্য').scrollIntoView().should('exist')
+    cy.contains('খ. প্রতিষ্ঠানের বার্ষিক উৎপাদন ক্ষমতা').scrollIntoView().should('exist')
+    cy.contains('গ. বিক্রয় %').scrollIntoView().should('be.visible')
+    cy.contains('ঘ. প্রতিষ্ঠানের জনবল').scrollIntoView().should('exist')
+    cy.contains('ঙ. প্রয়োজনীয় উপযোগ-সেবার বিবরণ').scrollIntoView().should('be.visible')
+    cy.contains('চ. বিনিয়োগ').scrollIntoView().should('be.visible')
+
+    // Section 3: যন্ত্রপাতি ও সরঞ্জামাদি
+    cy.contains('p.section_head', 'যন্ত্রপাতি ও সরঞ্জামাদি').scrollIntoView().should('be.visible')
+    cy.wait(1000)
+    cy.contains('যন্ত্রপাতি ও সরঞ্জামাদি').scrollIntoView().should('exist')
+    cy.contains('কাঁচামাল ও').scrollIntoView().should('be.visible')
+
+    // Section 4: উদ্যোক্তাগণের তথ্য
+    cy.contains('p.section_head', 'উদ্যোক্তাগণের তথ্য').scrollIntoView().should('be.visible')
+    cy.contains('প্রতিষ্ঠানের উদ্যোক্তা/পরিচালকগণের তথ্য').scrollIntoView().should('exist')
+
+    // Section 5: সংযুক্তি
+    cy.contains('p.section_head', 'সংযুক্তি').scrollIntoView().should('be.visible')
+    cy.contains('উদ্যোক্তার পক্ষে আবেদনপত্র').scrollIntoView().should('exist')
+    cy.contains('সংযুক্তি').scrollIntoView().should('exist')
+
+}
